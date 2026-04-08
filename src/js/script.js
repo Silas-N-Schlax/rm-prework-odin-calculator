@@ -18,7 +18,6 @@ document.addEventListener('keydown', (e) => {
     "9", "0", "-", "+", 
     ".", "=", "x"
   ]
-  // not listed yet, /,*,=,enter
   if (keyList.includes(e.key)) {
     document.getElementById(`${e.key}`).click()
   } else if (e.key === "*") {
@@ -32,7 +31,6 @@ document.addEventListener('keydown', (e) => {
   } else if (e.key === "Backspace" || e.key === "Delete") {
     document.getElementById("delete").click()
   }
-  console.log(e.key)
 })
 
 
@@ -56,7 +54,6 @@ function sortUserInput(input) {
 
 
 function manageButtons(input) {
-  console.log(input)
   switch (input) {
     case "=":
       let data = evalulate(equation)
