@@ -1,5 +1,6 @@
 
 let equation = ""
+const operators = ['+', '-', 'x', '÷']
 
 
 let buttons = document.querySelectorAll('.btn')
@@ -11,7 +12,6 @@ buttons.forEach((button) => {
 
 
 function sortUserInput(input) {
-  const operators = ['+', '-', 'x', '÷']
   const buttons = ['=', 'clear', ".", "delete"]
   if (operators.includes(input)) {
     if (
@@ -22,7 +22,7 @@ function sortUserInput(input) {
     }
   } else if (buttons.includes(input)) {
     let hasError = manageButtons(input)
-    hasError.error ? displayError(hasError.reason) : null
+    if (hasError) return displayError(hasError.reason)
   } else {
     updateEquation(input)
   }
