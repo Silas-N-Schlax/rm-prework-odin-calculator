@@ -12,6 +12,19 @@ function evalulate(equation) {
   return answer
 }
 
+function test(inputs) {
+  passed = 0
+  for (let i = 0; i < inputs.length; i++) {
+    let answer = Number(evalulate(inputs[i][0]))
+    if (answer === inputs[i][1]) {
+      console.log(`%c${i} passed`, "color: lightgreen")
+      passed++
+    } else {
+      console.log(`%c${i} FAILED\n ${inputs[i][0]} (${inputs[i][1]})`, "color: red")
+    }
+  }
+  console.log(`%c${passed}/${inputs.length} PASSED`, "color: orange")
+}
 
 function calculateAS(input) {
   if (input.error) return input
