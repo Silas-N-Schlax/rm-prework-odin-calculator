@@ -21,7 +21,8 @@ function sortUserInput(input) {
       updateEquation(input)
     }
   } else if (buttons.includes(input)) {
-    manageButtons(input)
+    let hasError = manageButtons(input)
+    hasError.error ? displayError(hasError.reason) : null
   } else {
     updateEquation(input)
   }
@@ -32,7 +33,8 @@ function manageButtons(input) {
   console.log(input)
   switch (input) {
     case "=":
-      return evalulate(equation)
+      let data = evalulate(equation)
+      return data.error ? displayError(data.reason) : updateEquationWithAnswer(data.answer)
     case ".":
       return addDecimal()
     case "clear": 
@@ -74,9 +76,18 @@ function updateEquation(input) {
   updateDisplayWithUserInput()
 }
 
+function updateEquationWithAnswer(input) {
+  equation = input
+  updateDisplayWithUserInput()
+}
+
 function updateDisplayWithUserInput(reset = false) {
   let display = document.querySelector('.display')
   display.textContent = reset ? "0" : equation
 }
 
+
+function displayError(error) {
+  alert(`There has been an error: ${error}`)
+}
 
