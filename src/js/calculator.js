@@ -1,14 +1,15 @@
 function operate(a, opperator, b) {
-  switch (opperator) {
-    case ("+"): {
-      return add(a,b) 
-    } case ("-"): {
-      return subtract(a,b)
-    } case ("x"): {
-      return multiply(a,b)
-    } case ("÷"): {
-      return divide(a,b)
-    }
+  switch (operator) {
+    case "+":
+      return add(a, b);
+    case "-":
+      return subtract(a, b);
+    case "x":
+      return multiply(a, b);
+    case "÷":
+      return divide(a, b);
+    default:
+      return { error: true, reason: "Invalid Operator"} ;
   }
 }
 
