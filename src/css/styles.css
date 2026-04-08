@@ -1,1 +1,29 @@
-@import "./calculator.css"
+@import "./calculator.css";
+
+@font-face {
+  font-family: "Segment";
+  src: url('../../7segment.ttf');
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto Mono", monospace;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #cde2f5;
+}
+
+h1 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+p {
+  padding-bottom: 30px;
+}

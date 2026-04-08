@@ -1,0 +1,78 @@
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top, .bottom {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  background-color: #898787;
+  padding: 0 10px;
+}
+
+.top { padding-top: 30px; }
+.bottom { padding-bottom: 30px; }
+
+.display {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  background-color: #cfc4c4;
+  font-size: 35px;
+  width: 230px;
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 5px
+}
+
+.top {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.bottom {
+  border-end-end-radius: 16px;
+  border-end-start-radius: 16px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px
+}
+
+.btn {
+  width: 50px;
+  height: 45px;
+  border: none;
+  font-size: 33px;
+  background-color: #ffffff;
+}
+
+.btn.num { font-family: "Segment"; }
+
+.btn.op { background-color: #418fd3; }
+.btn.eq { background: #ec801a; }
+.btn.clear { background-color: #ba1616; }
+.btn.delete { background-color: #d06135; }
+
+.btn:hover { background-color: #d2cece; }
+.btn.op:hover { background-color: #3779b3; }
+.btn.eq:hover { background: #c86c16; }
+.btn.clear:hover { background-color: #9e1212; }
+.btn.delete:hover { background-color: #b0522d; }
+
+.btn.double {
+  width: 110px;
+  font-size: 23px;
+}
