@@ -1,39 +1,46 @@
 
+let equation = "0"
+
+
 let buttons = document.querySelectorAll('.btn')
 buttons.forEach((button) => {
-  button.addEventListener('click', (e) => { updateDisplayWithUserInput(e.target.id)})
+  button.addEventListener('click', (e) => { 
+    sortUserInput(e.target.id)
+  })
 })
 
 
-
-
-function updateDisplayWithUserInput(input) {
-  let display = document.querySelector('.display')
-  if (display.textContent === "0") {
-    display.textContent = input
-  } else {
-    display.textContent += ` ${input} `
-  }
-}
-
-
-
-function operate(a, opperator, b) {
-  switch (opperator) {
-    case ("+"): {
-      return add(a,b) 
-    } case ("-"): {
-      return subtract(a,b)
-    } case ("x"): {
-      return multiply(a,b)
-    } case ("÷"): {
-      return divide(a,b)
+function sortUserInput(input) {
+  const operators = ['+', '-', 'x', '÷']
+  const buttons = ['=', 'clear', ".", "delete"]
+  const lastInput = equation.split("")
+  if (operators.includes(input)) {
+    if (
+      !operators.includes(lastInput[lastInput.length - 1]) &&
+      lastInput[lastInput.length - 1] != "0"
+    ) {
+      updateEquation(input)
     }
+  } else if (buttons.includes(input)) {
+    manageButtons(input)
+  } else {
+    updateEquation(input)
   }
 }
 
 
-function add (a,b) { return a + b }
-function subtract (a,b) { return a - b }
-function multiply (a,b) { return a * b }
-function divide (a,b) { return a / b }
+function updateEquation(input) {
+  if (equation === "0") {
+    equation = input
+  } else {
+    equation += input
+  }
+  updateDisplayWithUserInput()
+}
+
+function updateDisplayWithUserInput() {
+  let display = document.querySelector('.display')
+  display.textContent = equation
+}
+
+
