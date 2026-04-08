@@ -11,6 +11,32 @@ buttons.forEach((button) => {
 })
 
 
+document.addEventListener('keydown', (e) => {
+  let keyList = [
+    "1", "2", "3", "4", 
+    "5", "6", "7", "8", 
+    "9", "0", "-", "+", 
+    ".", "=", "x"
+  ]
+  // not listed yet, /,*,=,enter
+  if (keyList.includes(e.key)) {
+    document.getElementById(`${e.key}`).click()
+  } else if (e.key === "*") {
+    document.getElementById("x").click()
+  } else if (e.key === "/") {
+    document.getElementById("÷").click()
+  } else if (e.key === "Enter") {
+    document.getElementById("=").click()
+  } else if (e.key === "Escape") {
+    document.getElementById("clear").click()
+  } else if (e.key === "Backspace" || e.key === "Delete") {
+    document.getElementById("delete").click()
+  }
+  console.log(e.key)
+})
+
+
+
 function sortUserInput(input) {
   const buttons = ['=', 'clear', ".", "delete"]
   if (operators.includes(input)) {
@@ -34,7 +60,11 @@ function manageButtons(input) {
   switch (input) {
     case "=":
       let data = evalulate(equation)
-      return data.error ? displayError(data.reason) : updateEquationWithAnswer(data.answer)
+      if (data.error) {
+        return displayError(data.reason) 
+      } else {
+        return updateEquationWithAnswer(data.answer)
+      } 
     case ".":
       return addDecimal()
     case "clear": 
@@ -49,7 +79,6 @@ function manageButtons(input) {
 function addDecimal() {
   if (getLastInput() != '.') {
     let input = equation.length === 0 ? "0." : "."
-    console.log("adding decimal")
     updateEquation(input)
   }
 }
