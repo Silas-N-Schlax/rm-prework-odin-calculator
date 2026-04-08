@@ -1,5 +1,5 @@
 
-let equation = "0"
+let equation = ""
 
 
 let buttons = document.querySelectorAll('.btn')
@@ -13,11 +13,10 @@ buttons.forEach((button) => {
 function sortUserInput(input) {
   const operators = ['+', '-', 'x', '÷']
   const buttons = ['=', 'clear', ".", "delete"]
-  const lastInput = equation.split("")
   if (operators.includes(input)) {
     if (
-      !operators.includes(lastInput[lastInput.length - 1]) &&
-      lastInput[lastInput.length - 1] != "0"
+      !operators.includes(getLastInput()) &&
+      equation.length > 0
     ) {
       updateEquation(input)
     }
@@ -29,18 +28,55 @@ function sortUserInput(input) {
 }
 
 
-function updateEquation(input) {
-  if (equation === "0") {
-    equation = input
-  } else {
-    equation += input
+function manageButtons(input) {
+  console.log(input)
+  switch (input) {
+    case "=":
+      return evalulate(equation)
+    case ".":
+      return addDecimal()
+    case "clear": 
+      return clearEquation()
+    case "delete": 
+      return deleteLastInput()
+    default:
+      return { error: true, reason: "Invalid Button ID" }
   }
+}
+
+function addDecimal() {
+  if (getLastInput() != '.') {
+    let input = equation.length === 0 ? "0." : "."
+    console.log("adding decimal")
+    updateEquation(input)
+  }
+}
+
+function clearEquation() {
+  equation = ""
+  updateDisplayWithUserInput(true)
+}
+
+function deleteLastInput() {
+  equation = equation.split("")
+  equation.pop()
+  equation = equation.join("")
+  equation.length === 0 ? clearEquation() : updateDisplayWithUserInput()
+}
+
+function getLastInput() {
+  return equation.length > 0 ? equation.split("")[equation.length - 1] : ""
+}
+
+
+function updateEquation(input) {
+  equation += input
   updateDisplayWithUserInput()
 }
 
-function updateDisplayWithUserInput() {
+function updateDisplayWithUserInput(reset = false) {
   let display = document.querySelector('.display')
-  display.textContent = equation
+  display.textContent = reset ? "0" : equation
 }
 
 
