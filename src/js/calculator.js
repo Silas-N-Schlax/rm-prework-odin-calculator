@@ -8,8 +8,8 @@ function evalulate(equation) {
   let answer = calculateAS(calculateMD(equationAry))
   answer = answer.split("").includes(".") ? String(Number(answer).toFixed(3)) : answer
   
-  updateEquationWithAnswer(answer)
-  return answer
+  
+  return { answer: answer}
 }
 
 function test(inputs) {
