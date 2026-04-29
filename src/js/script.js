@@ -43,6 +43,7 @@ function sortUserInput(input) {
       equation.length > 0
     ) {
       updateEquation(input)
+      enableDotButton()
     }
   } else if (buttons.includes(input)) {
     let hasError = manageButtons(input)
@@ -60,6 +61,7 @@ function manageButtons(input) {
       if (data.error) {
         return displayError(data.reason) 
       } else {
+        if (!data.answer.split("").includes('.')) enableDotButton()
         return updateEquationWithAnswer(data.answer)
       } 
     case ".":
@@ -74,20 +76,24 @@ function manageButtons(input) {
 }
 
 function addDecimal() {
-  if (getLastInput() != '.') {
+  lastInput = getLastInput()
+  if (lastInput != '.' && !operators.includes(lastInput)) {
     let input = equation.length === 0 ? "0." : "."
     updateEquation(input)
+    disableDotButton()
   }
 }
 
 function clearEquation() {
   equation = ""
   updateDisplayWithUserInput(true)
+  enableDotButton()
 }
 
 function deleteLastInput() {
   equation = equation.split("")
-  equation.pop()
+  last = equation.pop()
+  if (last == '.') enableDotButton()
   equation = equation.join("")
   equation.length === 0 ? clearEquation() : updateDisplayWithUserInput()
 }
@@ -96,6 +102,13 @@ function getLastInput() {
   return equation.length > 0 ? equation.split("")[equation.length - 1] : ""
 }
 
+function disableDotButton() {
+  document.getElementById('.').disabled = true
+}
+
+function enableDotButton() {
+  document.getElementById('.').disabled = false
+}
 
 function updateEquation(input) {
   equation += input
